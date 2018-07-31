@@ -128,7 +128,39 @@
  
 #### 5.创建 `Audio Looper`
 
+**播放 play**
+
+- 要对三个播放器实例的播放进行同步,需要捕捉当前设备时间并添加一个小延时,这样就会具有一个从开始播放时间计算的参照时间.
+- 通过对每个实例调用 `playAtTime:`方法并传递延时参照时间,遍历播放器数组并开始播放.
+- 这样就保证了这些播放器在音频播放时始终保持紧密同步
+
+```objc
+- (void)play {
+    if (!self.playing) {
+        NSTimeInterval delayTime = [self.players[0] deviceCurrentTime] + 0.01;
+        for (AVAudioPlayer *player in self.players) {
+            [player playAtTime:delayTime];
+        }
+        self.playing = YES;
+    }
+}
+```
 
 
+**停止播放 stop**
+
+- 对播放器实例设置器 `currentime` 属性为0.0f 时,这样做会让播放进度回到音频文件的原点.
+
+```objc
+- (void)stop {
+    if (self.playing) {
+        for (AVAudioPlayer *player in self.players) {
+            [player stop];
+            player.currentTime = 0.0f;
+        }
+        self.playing = NO;
+    }
+}
+```
 
 
