@@ -32,29 +32,41 @@ static TYPlayer *instancePlayer = nil;
 }
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
-    return [TYPlayer shareInstance];
-}
-
-- (id)copy {
-    return self;
-}
-
-- (id)mutableCopy {
-    return self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instancePlayer = [super allocWithZone:zone];
+    });
+    return instancePlayer;
 }
 
 - (id)copyWithZone:(struct _NSZone *)zone {
-    return [TYPlayer shareInstance];
+    return instancePlayer;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
         self.players = @[self.guitarPlayer, self.bassPlayer, self.drumPlayer];
+        
+        // 注册音频中断通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];
+        
     }
     return self;
 }
 
 #pragma mark - Method
+// 注册音频中断通知
+- (void)handleInterruption:(NSNotification *)notif {
+    // 1.通过 AVAudioSessionInterruptionTypeKey 的值确定中断类型(type).返回值是 AVAudioSessionInterruptionType, 这是用来表示中断开始或结束的枚举类型
+    NSDictionary *info = notif.userInfo;
+    AVAudioSessionInterruptionType type = [info[AVAudioSessionInterruptionTypeKey] unsignedIntegerValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        // Handle AVAudioSessionInterruptionTypeBegan
+    } else {
+        // Handle AvAudioSessionInterruptionTypeEnded
+    }
+}
+
 // 要对三个播放器实例的播放进行同步,需要捕捉当前设备时间并添加一个小延时,这样就会具有一个从开始播放时间计算的参照时间.
 // 通过对每个实例调用 playAtTime: 方法并传递延时参照时间,遍历播放器数组并开始播放.
 // 这样就保证了这些播放器在音频播放时始终保持紧密同步.

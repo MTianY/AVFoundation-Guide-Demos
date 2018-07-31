@@ -164,3 +164,70 @@
 ```
 
 
+#### 6.为`AudioPlayer`配置音频会话
+
+- 如上在 `application:didFinishLaunchingWithOptions:`方法中配置好音频会话后.此时我们切换设备上的`"铃音/静音"`开关不能让声音消失.
+- 在`info.plist`中添加`Required background modes----Array`,然后在这个数组子项添加`item 0 ---- App plays audio or streams audio/video using AirPlay`
+
+#### 7.处理中断事件
+
+场景:
+
+- 在设备上运行 Audio Looper 应用程序并播放音频.
+- 当音频处于播放状态时,从另一台设备上向当前设备发起电话呼叫或 FaceTime 呼叫以制造中断.
+- 在另一台设备上按 Decline 按钮终止呼叫或 FaceTime 请求.
+
+按上述场景进行测试,会发现一些有趣的行为.当中断发生时,播放中的音频会慢慢消失和暂停.这一效果是自动实现的,我们没有编写任何代码.不过当我们点击另一台设备上的 Decline 按钮以终止中断时,会发现一些问题. Play/Stop 按钮处于不可用状态,音频播放也没有如预期般恢复.
+
+**音频会话通知**
+
+- 在准备为出现的中断事件采取动作前,首先需要得到中断出现的通知,注册应用程序的`AVAudioSession`发送的通知`AVAudioSessionInterruptionNotification`.
+- 通过 `AVAudioSessionInterruptionTypeKey` 的值确定中断类型(type).返回值是 `AVAudioSessionInterruptionType`, 这是用来表示中断开始或结束的枚举类型
+
+```objc
+- (instancetype)init {
+    if (self = [super init]) {
+        self.players = @[self.guitarPlayer, self.bassPlayer, self.drumPlayer];
+        
+        // 注册音频中断通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:[AVAudioSession sharedInstance]];
+        
+    }
+    return self;
+}
+
+// 注册音频中断通知
+- (void)handleInterruption:(NSNotification *)notif {
+    // 1.通过 AVAudioSessionInterruptionTypeKey 的值确定中断类型(type).返回值是 AVAudioSessionInterruptionType, 这是用来表示中断开始或结束的枚举类型
+    NSDictionary *info = notif.userInfo;
+    AVAudioSessionInterruptionType type = [info[AVAudioSessionInterruptionTypeKey] unsignedIntegerValue];
+    if (type == AVAudioSessionInterruptionTypeBegan) {
+        // Handle AVAudioSessionInterruptionTypeBegan
+    } else {
+        // Handle AvAudioSessionInterruptionTypeEnded
+    }
+}
+```
+
+**对线路改变的响应**
+
+在 iOS 设备上添加或移除音频输入、输出线路时,会发生线路改变.
+有多重原因或导致线路的变化,如
+
+- 用户插入耳机
+- 断开 USB 麦克风
+
+当这些事件发生时,音频会根据情况改变输入或输出线路, 同时`AVAudioSession`会广播一个描述改变化的通知给所有相关的侦听器.为遵循 Apple 的 Human Interface Guidelines(HIG)的相关定义,应用程序应该成为这些相关侦听器中的一员.
+
+*测试*
+
+开始播放,并在播放期间插入耳机.音频输出线路变为耳机插孔并继续正常播放,这正是我们所期望的效果.保持音频处于播放状态,断开耳机连接.音频线路再次回到设备的内置扬声器,我们再次听到了声音.
+虽然线路变化同预期一样,`不过按照苹果公司的相关文档 ,该音频应该处于静音状态.`
+当用户插入耳机时,隐含的意思是用户不希望外界听到具体的音频内容.这就意味着当用户断开耳机时,播放的内容可能需要继续保密,所以我们需要停止音频播放.
+
+*具体做法*
+
+- 当线路发生变化时有通知,我们首先要注册`AVAudioSession`发送的通知.该通知名为`AVAudioSessionRouteChangeNotification`.
+- 同音频中断的方法类似.
+
+

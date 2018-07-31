@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TYAudioLooperViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -22,9 +23,21 @@
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[TYAudioLooperViewController new]];
     [self.window makeKeyAndVisible];
     
+    [self setupAudioSession];
+    
     return YES;
 }
 
+- (void)setupAudioSession {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *error;
+    if (![session setCategory:AVAudioSessionCategoryPlayback error:&error]) {
+        NSLog(@"category error:%@",[error localizedDescription]);
+    }
+    if (![session setActive:YES error:&error]) {
+        NSLog(@"active error:%@",[error localizedDescription]);
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
