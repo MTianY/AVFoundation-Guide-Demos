@@ -1,0 +1,13 @@
+//
+//  TYAudioLooperViewController.h
+//  AudioLooperDemo
+//
+//  Created by Maty on 2018/7/31.
+//  Copyright © 2018年 kangarootec. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface TYAudioLooperViewController : UIViewController
+
+@end
