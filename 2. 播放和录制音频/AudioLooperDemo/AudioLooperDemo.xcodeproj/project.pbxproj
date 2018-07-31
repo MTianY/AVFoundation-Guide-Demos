@@ -14,6 +14,10 @@
 		4C74BC32210FFBBD00BD73A4 /* AudioLooperDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C74BC31210FFBBD00BD73A4 /* AudioLooperDemoTests.m */; };
 		4C74BC3D210FFBBD00BD73A4 /* AudioLooperDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C74BC3C210FFBBD00BD73A4 /* AudioLooperDemoUITests.m */; };
 		4C74BC4C210FFBF800BD73A4 /* TYAudioLooperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C74BC4B210FFBF800BD73A4 /* TYAudioLooperViewController.m */; };
+		4C74BC4F2110348100BD73A4 /* TYPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C74BC4E2110348100BD73A4 /* TYPlayer.m */; };
+		4C74BC51211039CC00BD73A4 /* guitar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C74BC50211039CC00BD73A4 /* guitar.mp3 */; };
+		4C74BC53211039D300BD73A4 /* drum.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C74BC52211039D300BD73A4 /* drum.mp3 */; };
+		4C74BC55211039DB00BD73A4 /* bass.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4C74BC54211039DB00BD73A4 /* bass.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,11 @@
 		4C74BC3E210FFBBD00BD73A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C74BC4A210FFBF800BD73A4 /* TYAudioLooperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYAudioLooperViewController.h; sourceTree = "<group>"; };
 		4C74BC4B210FFBF800BD73A4 /* TYAudioLooperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYAudioLooperViewController.m; sourceTree = "<group>"; };
+		4C74BC4D2110348100BD73A4 /* TYPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYPlayer.h; sourceTree = "<group>"; };
+		4C74BC4E2110348100BD73A4 /* TYPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYPlayer.m; sourceTree = "<group>"; };
+		4C74BC50211039CC00BD73A4 /* guitar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guitar.mp3; sourceTree = "<group>"; };
+		4C74BC52211039D300BD73A4 /* drum.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = drum.mp3; sourceTree = "<group>"; };
+		4C74BC54211039DB00BD73A4 /* bass.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bass.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +108,15 @@
 		4C74BC17210FFBBB00BD73A4 /* AudioLooperDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4C74BC50211039CC00BD73A4 /* guitar.mp3 */,
+				4C74BC52211039D300BD73A4 /* drum.mp3 */,
+				4C74BC54211039DB00BD73A4 /* bass.mp3 */,
 				4C74BC18210FFBBB00BD73A4 /* AppDelegate.h */,
 				4C74BC19210FFBBB00BD73A4 /* AppDelegate.m */,
 				4C74BC4A210FFBF800BD73A4 /* TYAudioLooperViewController.h */,
 				4C74BC4B210FFBF800BD73A4 /* TYAudioLooperViewController.m */,
+				4C74BC4D2110348100BD73A4 /* TYPlayer.h */,
+				4C74BC4E2110348100BD73A4 /* TYPlayer.m */,
 				4C74BC21210FFBBD00BD73A4 /* Assets.xcassets */,
 				4C74BC23210FFBBD00BD73A4 /* LaunchScreen.storyboard */,
 				4C74BC26210FFBBD00BD73A4 /* Info.plist */,
@@ -233,7 +247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C74BC25210FFBBD00BD73A4 /* LaunchScreen.storyboard in Resources */,
+				4C74BC55211039DB00BD73A4 /* bass.mp3 in Resources */,
 				4C74BC22210FFBBD00BD73A4 /* Assets.xcassets in Resources */,
+				4C74BC53211039D300BD73A4 /* drum.mp3 in Resources */,
+				4C74BC51211039CC00BD73A4 /* guitar.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +278,7 @@
 				4C74BC28210FFBBD00BD73A4 /* main.m in Sources */,
 				4C74BC1A210FFBBB00BD73A4 /* AppDelegate.m in Sources */,
 				4C74BC4C210FFBF800BD73A4 /* TYAudioLooperViewController.m in Sources */,
+				4C74BC4F2110348100BD73A4 /* TYPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

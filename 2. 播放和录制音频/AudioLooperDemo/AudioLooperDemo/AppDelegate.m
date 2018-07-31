@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [TYAudioLooperViewController new];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[TYAudioLooperViewController new]];
     [self.window makeKeyAndVisible];
     
     return YES;
