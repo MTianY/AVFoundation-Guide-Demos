@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class TYMemo;
 @interface TYVoiceMemoCell : UITableViewCell
-
+@property (nonatomic, strong) TYMemo *memo;
 @end

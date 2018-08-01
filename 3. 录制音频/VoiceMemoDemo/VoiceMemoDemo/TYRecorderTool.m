@@ -99,6 +99,27 @@ AVAudioRecorderDelegate
     return [paths objectAtIndex:0];
 }
 
+- (BOOL)playbackMemo:(TYMemo *)memo {
+    [self.audioPlayer stop];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:memo.url error:nil];
+    
+    if (self.audioPlayer) {
+        [self.audioPlayer play];
+        return YES;
+    }
+    
+    return NO;
+}
+
+#pragma mark -
+- (NSString *)formattedCurrentTime {
+    NSUInteger time = (NSUInteger)self.audioRecorder.currentTime;
+    NSInteger hours = (time / 3600);
+    NSInteger minutes = (time / 60) % 60;
+    NSInteger seconds = time % 60;
+    return [NSString stringWithFormat:@"%02li:%02li:%02li",(long)hours,(long)minutes,(long)seconds];
+}
+
 #pragma mark - <AVAudioRecorderDelegate>
 // 录音完成或停止时被调用,如果被中断而停止,不调用此方法
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {

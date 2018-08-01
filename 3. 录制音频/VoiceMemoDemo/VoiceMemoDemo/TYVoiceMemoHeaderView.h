@@ -10,4 +10,11 @@
 
 @interface TYVoiceMemoHeaderView : UIView
 
+@property (nonatomic, strong) NSMutableArray *memoInstanceMutArray;
+@property (nonatomic, strong) NSMutableArray *voiceNameMutArray;
+@property (nonatomic, strong) NSMutableArray *voiceUrlMutArray;
+
+- (void)startTimer;
+- (void)stopTimer;
+
 @end

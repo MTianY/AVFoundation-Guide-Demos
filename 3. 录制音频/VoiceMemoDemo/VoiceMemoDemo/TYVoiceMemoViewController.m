@@ -9,6 +9,7 @@
 #import "TYVoiceMemoViewController.h"
 #import "TYVoiceMemoCell.h"
 #import "TYVoiceMemoHeaderView.h"
+#import "TYRecorderTool.h"
 
 #define TYSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define TYSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -30,6 +31,14 @@ UITableViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TYNotification_SaveVoiceSuccess:) name:@"TYNotification_SaveVoiceSuccess" object:nil];
+    
+}
+
+#pragma mark - 通知方法
+- (void)TYNotification_SaveVoiceSuccess:(NSNotification *)notif {
+    [self.tableView reloadData];
 }
 
 #pragma mark - <UITableViewDataSource, UITableViewDelegate>
@@ -38,11 +47,14 @@ UITableViewDelegate
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    NSMutableArray *nameArra = self.headerView.voiceNameMutArray;
+    NSLog(@"%@",nameArra);
+    return nameArra.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TYVoiceMemoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    cell.memo = self.headerView.memoInstanceMutArray[indexPath.row];
     return cell;
 }
 
@@ -60,6 +72,11 @@ UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [self.headerView startTimer];
+    
+    TYMemo *memo = self.headerView.memoInstanceMutArray[indexPath.row];
+    // 播放
+    [[TYRecorderTool shareInstance] playbackMemo:memo];
 }
 
 #pragma mark - UI

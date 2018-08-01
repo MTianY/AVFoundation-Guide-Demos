@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UILabel *timeLabel;
 
+@property (nonatomic, weak) NSTimer *timer;
+
 @end
 
 @implementation TYVoiceMemoHeaderView
@@ -30,6 +32,20 @@
     return self;
 }
 
+#pragma mark - Timer
+- (void)startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateTime) userInfo:nil repeats:YES];
+}
+
+- (void)stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)updateTime {
+    self.timeLabel.text = [TYRecorderTool shareInstance].formattedCurrentTime;
+}
+
 #pragma mark - Button Method
 - (void)playAndPauseButtonClick:(UIButton *)button {
     button.selected = !button.selected;
@@ -37,15 +53,22 @@
         // 开始录制
         [[TYRecorderTool shareInstance] record];
         
+        [self startTimer];
+        
     } else {
         NSLog(@"暂停");
         [[TYRecorderTool shareInstance] pause];
+        
+        [self stopTimer];
+        
     }
 }
 
 - (void)stopButtonClick:(UIButton *)button {
     [[TYRecorderTool shareInstance] stopWithCompletionHandler:^(BOOL success) {
         if (success) {
+            
+            [self stopTimer];
             
             [self.playAndPauseButton setSelected:NO];
             [self.playAndPauseButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
@@ -68,16 +91,22 @@
                 NSString *voiceFileName = textF.text;
                 [[TYRecorderTool shareInstance] saveRecordingWithName:voiceFileName completionHandler:^(BOOL success, TYMemo *memo) {
                     if (success) {
+                        
                         NSLog(@"%@",memo);
                         NSString *voiceName = memo.name;
                         NSURL *voiceUrl = memo.url;
+                        
+                        [self.memoInstanceMutArray addObject:memo];
+                        [self.voiceNameMutArray addObject:voiceName];
+                        [self.voiceUrlMutArray addObject:voiceUrl];
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"TYNotification_SaveVoiceSuccess" object:nil];
+                        
                     }
                 }];
             }];
             [alertVc addAction:saveAction];
             
-          
-
             [[self viewController] presentViewController:alertVc animated:YES completion:^{
                 
             }];
@@ -135,6 +164,27 @@
         _timeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _timeLabel;
+}
+
+- (NSMutableArray *)voiceNameMutArray {
+    if (nil == _voiceNameMutArray) {
+        _voiceNameMutArray = [NSMutableArray array];
+    }
+    return _voiceNameMutArray;
+}
+
+- (NSMutableArray *)voiceUrlMutArray {
+    if (nil == _voiceUrlMutArray) {
+        _voiceUrlMutArray = [NSMutableArray array];
+    }
+    return _voiceUrlMutArray;
+}
+
+- (NSMutableArray *)memoInstanceMutArray {
+    if (nil == _memoInstanceMutArray) {
+        _memoInstanceMutArray = [NSMutableArray array];
+    }
+    return _memoInstanceMutArray;
 }
 
 #pragma mark 拿到控制器

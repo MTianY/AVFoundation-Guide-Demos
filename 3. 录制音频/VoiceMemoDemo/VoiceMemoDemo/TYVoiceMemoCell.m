@@ -7,6 +7,7 @@
 //
 
 #import "TYVoiceMemoCell.h"
+#import "TYMemo.h"
 
 #define TYSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define TYSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -27,6 +28,14 @@
     return self;
 }
 
+#pragma mark - SET
+- (void)setMemo:(TYMemo *)memo {
+    _memo = memo;
+    
+    self.cellTitileLabel.text = [NSString stringWithFormat:@"%@",memo.name];
+    
+}
+
 #pragma mark - UI
 - (void)setupUI {
     
@@ -45,7 +54,7 @@
         _cellTitileLabel.textColor = [UIColor lightGrayColor];
         _cellTitileLabel.font = [UIFont systemFontOfSize:14];
         _cellTitileLabel.textAlignment = NSTextAlignmentCenter;
-        _cellTitileLabel.text = @"Title";
+//        _cellTitileLabel.text = @"Title";
     }
     return _cellTitileLabel;
 }
@@ -56,7 +65,7 @@
         _cellTimeLabel.textColor = [UIColor lightGrayColor];
         _cellTimeLabel.font = [UIFont systemFontOfSize:14];
         _cellTimeLabel.textAlignment = NSTextAlignmentCenter;
-        _cellTimeLabel.text = @"Time";
+//        _cellTimeLabel.text = @"Time";
     }
     return _cellTimeLabel;
 }
