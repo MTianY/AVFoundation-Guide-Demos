@@ -11,6 +11,8 @@
 @interface TYMemo : NSObject
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSURL *url;
+
++ (instancetype)memoWithTitle:(NSString *)titleName url:(NSURL *)url;
 
 @end

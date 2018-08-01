@@ -8,6 +8,7 @@
 
 #import "TYVoiceMemoHeaderView.h"
 #import "TYRecorderTool.h"
+#import "TYMemo.h"
 
 #define TYSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define TYSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -43,8 +44,45 @@
 }
 
 - (void)stopButtonClick:(UIButton *)button {
-    [[TYRecorderTool shareInstance] stopWithCompletionHandler:^(BOOL v) {
-        
+    [[TYRecorderTool shareInstance] stopWithCompletionHandler:^(BOOL success) {
+        if (success) {
+            
+            [self.playAndPauseButton setSelected:NO];
+            [self.playAndPauseButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+           
+            UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"存储语音备忘录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                NSLog(@"textField.text = %@",textField.text);
+                
+            }];
+            
+            UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVc addAction:deleteAction];
+            
+            UIAlertAction *saveAction = [UIAlertAction actionWithTitle:@"存储" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                // 取textF 的值
+                UITextField *textF = alertVc.textFields.firstObject;
+                NSString *voiceFileName = textF.text;
+                [[TYRecorderTool shareInstance] saveRecordingWithName:voiceFileName completionHandler:^(BOOL success, TYMemo *memo) {
+                    if (success) {
+                        NSLog(@"%@",memo);
+                        NSString *voiceName = memo.name;
+                        NSURL *voiceUrl = memo.url;
+                    }
+                }];
+            }];
+            [alertVc addAction:saveAction];
+            
+          
+
+            [[self viewController] presentViewController:alertVc animated:YES completion:^{
+                
+            }];
+            
+        }
     }];
 }
 
@@ -98,5 +136,18 @@
     }
     return _timeLabel;
 }
+
+#pragma mark 拿到控制器
+//一直遍历视图的父视图,找他的响应者.如果响应者是视图控制器,则返回它.
+- (UIViewController *)viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]){
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
 
 @end

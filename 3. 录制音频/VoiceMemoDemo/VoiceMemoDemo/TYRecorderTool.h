@@ -11,6 +11,7 @@
 typedef void(^TYRecordingStopCompletionHandler)(BOOL);
 typedef void(^TYRecordingSaveCompletionHandler)(BOOL, id);
 
+@class TYMemo;
 @interface TYRecorderTool : NSObject
 
 + (instancetype)shareInstance;
@@ -23,6 +24,6 @@ typedef void(^TYRecordingSaveCompletionHandler)(BOOL, id);
 - (void)stopWithCompletionHandler:(TYRecordingStopCompletionHandler)handler;
 - (void)saveRecordingWithName:(NSString *)name completionHandler:(TYRecordingSaveCompletionHandler)handler;
 
-//- (BOOL)playbackMemo:(TYMemo *)memo;
+- (BOOL)playbackMemo:(TYMemo *)memo;
 
 @end

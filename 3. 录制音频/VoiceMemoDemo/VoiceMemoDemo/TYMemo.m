@@ -9,6 +9,24 @@
 
 #import "TYMemo.h"
 
+@interface TYMemo ()
+
+@end
+
 @implementation TYMemo
+
+- (instancetype)init {
+    if (self = [super init]) {
+    
+    }
+    return self;
+}
+
++ (TYMemo *)memoWithTitle:(NSString *)titleName url:(NSURL *)url {
+    TYMemo *memo = [[TYMemo alloc] init];
+    memo.name = titleName;
+    memo.url = url;
+    return memo;
+}
 
 @end

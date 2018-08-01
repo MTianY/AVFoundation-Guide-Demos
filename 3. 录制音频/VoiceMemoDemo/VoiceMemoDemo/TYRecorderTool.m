@@ -8,6 +8,7 @@
 
 #import "TYRecorderTool.h"
 #import <AVFoundation/AVFoundation.h>
+#import "TYMemo.h"
 
 static TYRecorderTool *_instance = nil;
 
@@ -86,7 +87,7 @@ AVAudioRecorderDelegate
     BOOL success = [[NSFileManager defaultManager] copyItemAtURL:srcURL toURL:destURL error:&error];
     
     if (success) {
-        handler(YES, nil);
+        handler(YES, [TYMemo memoWithTitle:name url:destURL]);
         [self.audioRecorder prepareToRecord];
     } else {
         handler(NO, error);
