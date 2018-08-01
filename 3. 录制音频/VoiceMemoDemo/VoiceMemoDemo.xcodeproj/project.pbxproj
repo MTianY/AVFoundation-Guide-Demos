@@ -16,6 +16,8 @@
 		4C7A65462111409F00F6F9A9 /* TYVoiceMemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65452111409F00F6F9A9 /* TYVoiceMemoViewController.m */; };
 		4C7A65492111448C00F6F9A9 /* TYVoiceMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65482111448C00F6F9A9 /* TYVoiceMemoCell.m */; };
 		4C7A654C2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A654B2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m */; };
+		4C7A65502111883C00F6F9A9 /* TYRecorderTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A654F2111883C00F6F9A9 /* TYRecorderTool.m */; };
+		4C7A65532111937600F6F9A9 /* TYMemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65522111937600F6F9A9 /* TYMemo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		4C7A65482111448C00F6F9A9 /* TYVoiceMemoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVoiceMemoCell.m; sourceTree = "<group>"; };
 		4C7A654A2111454B00F6F9A9 /* TYVoiceMemoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVoiceMemoHeaderView.h; sourceTree = "<group>"; };
 		4C7A654B2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVoiceMemoHeaderView.m; sourceTree = "<group>"; };
+		4C7A654E2111883C00F6F9A9 /* TYRecorderTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYRecorderTool.h; sourceTree = "<group>"; };
+		4C7A654F2111883C00F6F9A9 /* TYRecorderTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYRecorderTool.m; sourceTree = "<group>"; };
+		4C7A65512111937600F6F9A9 /* TYMemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYMemo.h; sourceTree = "<group>"; };
+		4C7A65522111937600F6F9A9 /* TYMemo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYMemo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,10 @@
 			children = (
 				4C7A65122111404C00F6F9A9 /* AppDelegate.h */,
 				4C7A65132111404C00F6F9A9 /* AppDelegate.m */,
+				4C7A65512111937600F6F9A9 /* TYMemo.h */,
+				4C7A65522111937600F6F9A9 /* TYMemo.m */,
+				4C7A654E2111883C00F6F9A9 /* TYRecorderTool.h */,
+				4C7A654F2111883C00F6F9A9 /* TYRecorderTool.m */,
 				4C7A65442111409F00F6F9A9 /* TYVoiceMemoViewController.h */,
 				4C7A65452111409F00F6F9A9 /* TYVoiceMemoViewController.m */,
 				4C7A654A2111454B00F6F9A9 /* TYVoiceMemoHeaderView.h */,
@@ -268,6 +278,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C7A65502111883C00F6F9A9 /* TYRecorderTool.m in Sources */,
+				4C7A65532111937600F6F9A9 /* TYMemo.m in Sources */,
 				4C7A65462111409F00F6F9A9 /* TYVoiceMemoViewController.m in Sources */,
 				4C7A65492111448C00F6F9A9 /* TYVoiceMemoCell.m in Sources */,
 				4C7A65222111404E00F6F9A9 /* main.m in Sources */,

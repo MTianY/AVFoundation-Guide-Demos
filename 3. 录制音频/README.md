@@ -53,3 +53,33 @@ kAudioFormatULaw
 ##### 1.4 指定格式的键
 
 
+#### 2.配置音频会话
+
+该Demo核心功能是录音和播放已录制的音频.所以不能使用默认的分类(AVAudioSessionCategorySoloAmbient).因为它不支持音频输入.
+因为即录音又要对外播放,合适的分类应该是`AVAudioSessionCategoryPlayAndRecord`. 配置信息如下:
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *error;
+    if (![session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
+        NSLog(@"Category Error: %@",[error localizedDescription]);
+    }
+    if (![session setActive:YES error:&error]) {
+        NSLog(@"Activation Error: %@",[error localizedDescription]);
+    }
+    
+    return YES;
+}
+```
+
+
+- info.plist 中请求权限
+
+```objc
+// 请求麦克风录制音频权限
+Privacy - Microphone Usage Description
+```
+

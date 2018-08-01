@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TYVoiceMemoViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()
 
@@ -22,9 +23,22 @@
     self.window.rootViewController = [TYVoiceMemoViewController new];
     [self.window makeKeyAndVisible];
     
+    [self setupAudioSession];
+    
     return YES;
 }
 
+// 配置音频会话
+- (void)setupAudioSession {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *error;
+    if (![session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error]) {
+        NSLog(@"Category Error: %@",[error localizedDescription]);
+    }
+    if (![session setActive:YES error:&error]) {
+        NSLog(@"Activation Error: %@",[error localizedDescription]);
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

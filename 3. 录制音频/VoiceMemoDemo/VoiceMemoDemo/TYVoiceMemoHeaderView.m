@@ -7,6 +7,7 @@
 //
 
 #import "TYVoiceMemoHeaderView.h"
+#import "TYRecorderTool.h"
 
 #define TYSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define TYSCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -32,14 +33,19 @@
 - (void)playAndPauseButtonClick:(UIButton *)button {
     button.selected = !button.selected;
     if (button.selected) {
+        // 开始录制
+        [[TYRecorderTool shareInstance] record];
         
     } else {
-        
+        NSLog(@"暂停");
+        [[TYRecorderTool shareInstance] pause];
     }
 }
 
 - (void)stopButtonClick:(UIButton *)button {
-    
+    [[TYRecorderTool shareInstance] stopWithCompletionHandler:^(BOOL v) {
+        
+    }];
 }
 
 #pragma mark - UI
