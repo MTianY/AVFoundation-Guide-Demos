@@ -14,6 +14,8 @@
 		4C7A652C2111404E00F6F9A9 /* VoiceMemoDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A652B2111404E00F6F9A9 /* VoiceMemoDemoTests.m */; };
 		4C7A65372111404E00F6F9A9 /* VoiceMemoDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65362111404E00F6F9A9 /* VoiceMemoDemoUITests.m */; };
 		4C7A65462111409F00F6F9A9 /* TYVoiceMemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65452111409F00F6F9A9 /* TYVoiceMemoViewController.m */; };
+		4C7A65492111448C00F6F9A9 /* TYVoiceMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A65482111448C00F6F9A9 /* TYVoiceMemoCell.m */; };
+		4C7A654C2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7A654B2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		4C7A65382111404E00F6F9A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C7A65442111409F00F6F9A9 /* TYVoiceMemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVoiceMemoViewController.h; sourceTree = "<group>"; };
 		4C7A65452111409F00F6F9A9 /* TYVoiceMemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVoiceMemoViewController.m; sourceTree = "<group>"; };
+		4C7A65472111448C00F6F9A9 /* TYVoiceMemoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVoiceMemoCell.h; sourceTree = "<group>"; };
+		4C7A65482111448C00F6F9A9 /* TYVoiceMemoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVoiceMemoCell.m; sourceTree = "<group>"; };
+		4C7A654A2111454B00F6F9A9 /* TYVoiceMemoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVoiceMemoHeaderView.h; sourceTree = "<group>"; };
+		4C7A654B2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVoiceMemoHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,10 @@
 				4C7A65132111404C00F6F9A9 /* AppDelegate.m */,
 				4C7A65442111409F00F6F9A9 /* TYVoiceMemoViewController.h */,
 				4C7A65452111409F00F6F9A9 /* TYVoiceMemoViewController.m */,
+				4C7A654A2111454B00F6F9A9 /* TYVoiceMemoHeaderView.h */,
+				4C7A654B2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m */,
+				4C7A65472111448C00F6F9A9 /* TYVoiceMemoCell.h */,
+				4C7A65482111448C00F6F9A9 /* TYVoiceMemoCell.m */,
 				4C7A651B2111404E00F6F9A9 /* Assets.xcassets */,
 				4C7A651D2111404E00F6F9A9 /* LaunchScreen.storyboard */,
 				4C7A65202111404E00F6F9A9 /* Info.plist */,
@@ -259,8 +269,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C7A65462111409F00F6F9A9 /* TYVoiceMemoViewController.m in Sources */,
+				4C7A65492111448C00F6F9A9 /* TYVoiceMemoCell.m in Sources */,
 				4C7A65222111404E00F6F9A9 /* main.m in Sources */,
 				4C7A65142111404C00F6F9A9 /* AppDelegate.m in Sources */,
+				4C7A654C2111454B00F6F9A9 /* TYVoiceMemoHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +435,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q27UDV8F4H;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = VoiceMemoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -441,6 +454,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q27UDV8F4H;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = VoiceMemoDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
